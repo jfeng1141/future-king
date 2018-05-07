@@ -15,7 +15,10 @@ import java.util.logging.Logger;
  * Created by Byant on 2018-05-06.
  */
 @Controller
+@RequestMapping(value = "product")
 public class ProductController {
+
+    private static org.slf4j.Logger logger = LoggerFactory.getLogger(ProductController.class);
 
     @Autowired
     private ProductService userService;
@@ -37,6 +40,7 @@ public class ProductController {
 
         key.setId(9);
         key.setProductId(1003);
+        logger.info(userService.selectByPrimaryKey(key).toString());
         return userService.selectByPrimaryKey(key);
     }
 }
