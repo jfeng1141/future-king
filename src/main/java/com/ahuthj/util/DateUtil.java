@@ -16,7 +16,9 @@ import java.util.Date;
  */
 public class DateUtil {
 
-	private static final String YYYY_MM_DD_HHMMSS = "yyyy-MM-dd HH:mm:ss";
+    public static final String STANDARD_FORMAT = "yyyy-MM-dd HH:mm:ss";
+
+    private static final String YYYY_MM_DD_HHMMSS = "yyyy-MM-dd HH:mm:ss";
 	
     /**
      * 1秒钟的毫秒数

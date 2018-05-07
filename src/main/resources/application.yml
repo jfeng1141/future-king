@@ -1,4 +1,5 @@
 server:
+  context-path: /king
   port: 8080
 
 spring:
@@ -38,3 +39,6 @@ pagehelper:
 logging:
     config:
         classpath: log4j2-spring.xml
+
+# 配置文件，通过 @Value("${com.email}") 引用
+com.email: ahuthj@163.com

@@ -1,15 +1,18 @@
 package com.ahuthj.controller;
 
+import com.ahuthj.model.Product;
 import com.ahuthj.model.ProductKey;
 import com.ahuthj.service.ProductService;
+import com.ahuthj.util.JsonUtil;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.logging.Logger;
 
 /**
  * Created by Byant on 2018-05-06.
@@ -18,7 +21,10 @@ import java.util.logging.Logger;
 @RequestMapping(value = "product")
 public class ProductController {
 
-    private static org.slf4j.Logger logger = LoggerFactory.getLogger(ProductController.class);
+    private static Logger logger = LoggerFactory.getLogger(ProductController.class);
+
+    @Value("${com.email}")
+    private String email;
 
     @Autowired
     private ProductService userService;
@@ -41,6 +47,11 @@ public class ProductController {
         key.setId(9);
         key.setProductId(1003);
         logger.info(userService.selectByPrimaryKey(key).toString());
-        return userService.selectByPrimaryKey(key);
+        Product p = userService.selectByPrimaryKey(key);
+
+        String str = JsonUtil.obj2StringPretty(p);
+        String str1 = JsonUtil.obj2String(p);
+        logger.info(email);
+        return str;
     }
 }
