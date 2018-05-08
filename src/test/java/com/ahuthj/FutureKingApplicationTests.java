@@ -1,5 +1,6 @@
 package com.ahuthj;
 
+import com.ahuthj.util.HttpClientUtil;
 import com.alibaba.fastjson.JSON;
 import org.apache.http.client.ClientProtocolException;
 import org.junit.Test;
@@ -13,8 +14,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.ahuthj.util.HttpClientUtil.sendPostDataByJson;
-import static com.ahuthj.util.HttpClientUtil.sendPostDataByMap;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -29,23 +28,20 @@ public class FutureKingApplicationTests {
 		logger.error("error级别的日志");
 	}
 
-	@Test
-	public void testSendPostDataByMap() throws ClientProtocolException, IOException {
-		String url = "http://localhost:8080/httpService/sendPostDataByMap";
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("name", "hj");
-		map.put("city", "南京");
-		String body = sendPostDataByMap(url, map, "utf-8");
-		System.out.println("响应结果：" + body);
-	}
 
 	@Test
 	public void testSendPostDataByJson() throws ClientProtocolException, IOException {
-		String url = "http://localhost:8080/httpService/sendPostDataByJson";
+		String url = "http://public-api.nj.ins.product.tuniu.org/ins-product/shn/manage/line/query/queryInsDetail";
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("name", "hj");
-		map.put("city", "南京");
-		String body = sendPostDataByJson(url, JSON.toJSONString(map), "utf-8");
-		System.out.println("响应结果：" + body);
+		map.put("resIds", "1930451953");
+		String body = HttpClientUtil.sendPostDataByJson(url, JSON.toJSONString(map), "utf-8");
+		System.out.println("2响应结果：" + body);
+	}
+
+	@Test
+	public void sendGetData()  throws ClientProtocolException, IOException {
+		String url = "http://public-api.nj.ins.product.tuniu.org/ins-product/MonitorProxy";
+		String body = HttpClientUtil.sendGetData(url,"utf-8");
+		System.out.println("3响应结果：" + body);
 	}
 }

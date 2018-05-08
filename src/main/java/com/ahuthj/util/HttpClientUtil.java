@@ -124,7 +124,7 @@ public class HttpClientUtil {
      * @throws ClientProtocolException
      * @throws IOException
      */
-    public String sendGetData(String url, String encoding) throws ClientProtocolException, IOException {
+    public static String sendGetData(String url, String encoding) throws ClientProtocolException, IOException {
         String result = "";
 
         // 创建httpclient对象
